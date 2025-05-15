@@ -3,7 +3,7 @@
 # ------------------------------------------------------
 
 type Product {
-  _id: ID!
+  id: String!
   name: String!
   upload_date: DateTime!
   description: String!
@@ -24,20 +24,20 @@ enum ProductStatus {
   DISABLED
 }
 
-type StringToBool {
+type BoolMap {
   id: String!
   isReal: Boolean!
 }
 
 type Category {
-  _id: String!
+  id: String!
   name: String!
 }
 
 type Query {
   getProducts: [Product!]!
   getProductById(id: String!): Product!
-  getRealProducts(ids: [String!]!): [StringToBool!]!
+  isProductsExist(ids: [String!]!): [BoolMap!]!
   getCategories: [Category!]!
 }
 
