@@ -15,9 +15,8 @@ export class ProductRepository {
 		return this.productModel.findById(id).exec();
 	}
 
-	async updatePrice(id: string, price: number) {
-		await this.productModel.updateOne({ _id: id }, { $set: { price } });
-		return this.productModel.findById(id);
+	async updatePrice(id: string, price: number): Promise<Product | null> {
+		return this.productModel.findByIdAndUpdate({ _id: id }, { $set: { price } }, { new: true }).exec();
 	}
 
 	async findActivatedProducts(ids: string[]) {}
