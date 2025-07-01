@@ -7,8 +7,8 @@
 	],
 	"scripts": {
 		"build": "turbo run build",
-		"start": "set NODE_ENV=development&& sh validate_env.sh&& turbo run start --no-cache --parallel --continue --no-daemon",
-		"dev": "set NODE_ENV=development&& turbo run dev --no-cache --parallel --continue --no-daemon --concurrency 20",
+		"start": "turbo run start",
+		"dev": "turbo run dev",
 		"dev:debug": "set NODE_ENV=development&& sh validate_env.sh&& turbo run dev:debug --no-cache --parallel --continue --no-daemon"
 	},
 	"devDependencies": {
