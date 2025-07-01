@@ -1,10 +1,27 @@
 import { Module } from '@nestjs/common';
-import { AppController } from './app.controller';
-import { AppService } from './app.service';
+import { GraphQLModule } from '@nestjs/graphql';
+import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
+import { join } from 'path';
+import { OrderModule } from './order/order.module';
+import { MongooseModule } from '@nestjs/mongoose';
+import { ConfigService } from '@nestjs/config';
+import { ConfigModule } from '@nestjs/config';
 
 @Module({
-  imports: [],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [
+		ConfigModule.forRoot({ isGlobal: true }),
+		MongooseModule.forRootAsync({
+			useFactory: async (configService: ConfigService) => ({
+				uri: configService.get<string>('MONGO_CONNECTION_STRING'),
+			}),
+			inject: [ConfigService],
+		}),
+		GraphQLModule.forRoot<ApolloDriverConfig>({
+			driver: ApolloDriver,
+			autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
+			csrfPrevention: false,
+		}),
+		OrderModule,
+	],
 })
 export class AppModule {}
