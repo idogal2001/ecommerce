@@ -1,6 +1,6 @@
 import { Injectable } from '@nestjs/common';
 import { ProductRepository } from './product.repository';
-import { Product } from '../schemas/product.schema';
+import { Product, ProductStatus } from '../schemas/product.schema';
 import { BoolMap } from '../utils/product.types';
 
 @Injectable()
@@ -30,5 +30,13 @@ export class ProductService {
 
 	async updatePrice(price: number, id: string): Promise<Product | null> {
 		return this.productRepository.updatePrice(id, price);
+	}
+
+	async deleteProduct(id: string): Promise<Product | null> {
+		return this.productRepository.deleteProduct(id);
+	}
+
+	async updateStatus(id: string, status: ProductStatus): Promise<Product | null> {
+		return this.productRepository.updateStatus(id, status);
 	}
 }

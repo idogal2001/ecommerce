@@ -1,6 +1,6 @@
 import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { ProductService } from './product.service';
-import { Product, BoolMap } from '../schemas/product.schema';
+import { Product, BoolMap, ProductStatus } from '../schemas/product.schema';
 import { CategoryService } from 'src/category/category.service';
 
 @Resolver(() => Product)
@@ -33,4 +33,16 @@ export class ProductResolver {
 	async updatePrice(@Args('price', { type: () => Number }) price: number, @Args('id', { type: () => String }) id: string) {
 		return this.productService.updatePrice(price, id);
 	}
+	@Mutation(() => Product)
+	async deleteProduct(@Args('id', { type: () => String }) id: string) {
+		return this.productService.deleteProduct(id);
+	}
+	@Mutation(() => Product)
+	async updateStatus(@Args('status', { type: () => ProductStatus }) status: ProductStatus, @Args('id', { type: () => String }) id: string) {
+		return this.productService.updateStatus(id, status);
+	}
+	// 	@Mutation(() => Product)
+	// async updatePrice(@Args('price', { type: () => Number }) price: number, @Args('id', { type: () => String }) id: string) {
+	// 	return this.productService.updatePrice(price, id);
+	// }
 }
