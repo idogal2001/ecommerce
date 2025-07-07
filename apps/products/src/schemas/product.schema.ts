@@ -17,6 +17,10 @@ export class Product {
 
 	@Prop()
 	@Field()
+	order_id: string;
+
+	@Prop()
+	@Field()
 	name: string;
 
 	@Prop()
@@ -39,13 +43,21 @@ export class Product {
 	@Field()
 	image_url: string;
 
-	@Prop({ type: Types.ObjectId, ref: 'Category' })
-	@Field(() => ID)
-	categories: Types.ObjectId;
+	@Prop()
+	@Field(() => [String])
+	categories: string[];
+
+	@Prop()
+	@Field(() => [String], { nullable: true })
+	categoryNames?: string[];
 
 	@Prop({ enum: ['ACTIVE', 'DISABLED'] })
 	@Field(() => ProductStatus)
 	status: 'ACTIVE' | 'DISABLED';
+
+	@Prop()
+	@Field()
+	amount: number;
 }
 
 @ObjectType()

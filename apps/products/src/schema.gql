@@ -4,14 +4,17 @@
 
 type Product {
   id: String!
+  order_id: String!
   name: String!
   upload_date: DateTime!
   description: String!
   price: Float!
   seller_name: String!
   image_url: String!
-  categories: ID!
+  categories: [String!]!
+  categoryNames: [String!]
   status: ProductStatus!
+  amount: Float!
 }
 
 """

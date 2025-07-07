@@ -1,10 +1,15 @@
-import { Args, Mutation, Query, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { ProductService } from './product.service';
 import { Product, BoolMap } from '../schemas/product.schema';
 
 @Resolver(() => Product)
 export class ProductResolver {
 	constructor(private productService: ProductService) {}
+
+	@ResolveField()
+	async categories(@Parent() product: Product) {
+		return this.productService.findAll();
+	}
 
 	@Query(() => [Product])
 	async getProducts() {
