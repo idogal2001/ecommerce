@@ -10,4 +10,11 @@ export class CategoryRepository {
 	async findAll(): Promise<Category[]> {
 		return this.categoryModel.find().exec();
 	}
+
+	async findByIds(ids: string[]): Promise<string[]> {
+		return this.categoryModel
+			.find({ _id: { $in: ids } })
+			.exec()
+			.then(categories => categories.map(category => category.name));
+	}
 }

@@ -17,7 +17,7 @@ export class Product {
 
 	@Prop()
 	@Field()
-	order_id: string;
+	orderId: number;
 
 	@Prop()
 	@Field()

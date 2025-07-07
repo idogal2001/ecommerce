@@ -1,14 +1,18 @@
 import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
 import { ProductService } from './product.service';
 import { Product, BoolMap } from '../schemas/product.schema';
+import { CategoryService } from 'src/category/category.service';
 
 @Resolver(() => Product)
 export class ProductResolver {
-	constructor(private productService: ProductService) {}
+	constructor(
+		private productService: ProductService,
+		private categoryService: CategoryService,
+	) {}
 
-	@ResolveField()
+	@ResolveField(() => [String], { name: 'categoryNames' })
 	async categories(@Parent() product: Product) {
-		return this.productService.findAll();
+		return this.categoryService.findByIds(product.categories);
 	}
 
 	@Query(() => [Product])

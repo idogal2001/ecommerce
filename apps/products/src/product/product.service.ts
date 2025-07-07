@@ -2,28 +2,13 @@ import { Injectable } from '@nestjs/common';
 import { ProductRepository } from './product.repository';
 import { Product } from '../schemas/product.schema';
 import { BoolMap } from '../utils/product.types';
-import { CategoryService } from 'src/category/category.service';
 
 @Injectable()
 export class ProductService {
-	constructor(
-		private readonly productRepository: ProductRepository,
-		private readonly categoryService: CategoryService,
-	) {}
+	constructor(private readonly productRepository: ProductRepository) {}
 
 	async findAll(): Promise<Product[]> {
-		const categories = await this.categoryService.findAll();
-		const products = await this.productRepository.findAll();
-		const productsWithCategoryNames = products.map(product => {
-			const categoryNames = categories.filter(category => product.categories?.includes(category.id)).map(category => category.name);
-
-			return {
-				...product,
-				categoryNames,
-			};
-		});
-
-		return productsWithCategoryNames;
+		return this.productRepository.findAll();
 	}
 
 	async findById(id: string): Promise<Product | null> {

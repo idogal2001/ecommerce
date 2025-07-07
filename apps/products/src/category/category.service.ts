@@ -9,4 +9,8 @@ export class CategoryService {
 	async findAll(): Promise<Category[]> {
 		return this.categoryRepository.findAll();
 	}
+
+	async findByIds(ids: string[]): Promise<string[]> {
+		return this.categoryRepository.findByIds(ids);
+	}
 }
