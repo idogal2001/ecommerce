@@ -6,13 +6,16 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 
 @Module({
 	imports: [
+		ConfigModule.forRoot(),
 		GraphQLModule.forRootAsync<ApolloGatewayDriverConfig>({
 			driver: ApolloGatewayDriver,
+			imports: [ConfigModule],
+			inject: [ConfigService],
 			useFactory: async (configService: ConfigService) => ({
 				gateway: {
 					supergraphSdl: new IntrospectAndCompose({
 						subgraphs: [
-							{ name: 'product', url: configService.get<string>('PRODUCTS_URL') },
+							{ name: 'products', url: configService.get<string>('PRODUCTS_URL') },
 							{ name: 'orders', url: configService.get<string>('ORDERS_URL') },
 						],
 					}),
