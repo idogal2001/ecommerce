@@ -16,8 +16,6 @@
 	},
 	"packageManager": "npm@8.19.2",
 	"dependencies": {
-		"@apollo/gateway": "^2.11.2",
-		"@apollo/subgraph": "^2.11.2",
 		"dotenv": "^17.0.0"
 	}
 }
