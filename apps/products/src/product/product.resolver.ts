@@ -24,7 +24,6 @@ export class ProductResolver {
 	async getProductById(@Args('id', { type: () => String }) id: string) {
 		return this.productService.findById(id);
 	}
-
 	@Query(() => [BoolMap])
 	async isProductsExist(@Args('ids', { type: () => [String] }) ids: string[]) {
 		return this.productService.isProductsExist(ids);
@@ -41,8 +40,4 @@ export class ProductResolver {
 	async updateStatus(@Args('status', { type: () => ProductStatus }) status: ProductStatus, @Args('id', { type: () => String }) id: string) {
 		return this.productService.updateStatus(id, status);
 	}
-	// 	@Mutation(() => Product)
-	// async updatePrice(@Args('price', { type: () => Number }) price: number, @Args('id', { type: () => String }) id: string) {
-	// 	return this.productService.updatePrice(price, id);
-	// }
 }
