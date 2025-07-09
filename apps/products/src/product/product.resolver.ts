@@ -2,6 +2,7 @@ import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver, Resolve
 import { ProductService } from './product.service';
 import { Product, BoolMap, ProductStatus } from '../schemas/product.schema';
 import { CategoryService } from 'src/category/category.service';
+import { Order } from 'src/entities/order.reference';
 
 @Resolver(() => Product)
 export class ProductResolver {
@@ -13,6 +14,11 @@ export class ProductResolver {
 	@ResolveField(() => [String])
 	async categories(@Parent() product: Product) {
 		return this.categoryService.findByIds(product.categories);
+	}
+
+	@ResolveField(() => Order)
+	order(@Parent() product: Product) {
+		return { __typename: 'Product', id: product.order_id };
 	}
 
 	@ResolveReference()

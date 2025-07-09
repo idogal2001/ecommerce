@@ -1,4 +1,4 @@
-import { Args, Query, Resolver, ResolveField, Parent } from '@nestjs/graphql';
+import { Args, Query, Resolver, ResolveField, Parent, ResolveReference } from '@nestjs/graphql';
 import { OrderService } from './order.service';
 import { Order } from '../schemas/order.schema';
 import { Product } from 'src/entities/product.reference';
@@ -19,7 +19,11 @@ export class OrderResolver {
 
 	@ResolveField(() => Product)
 	product(@Parent() order: Order) {
-		console.log(order.id);
 		return { __typename: 'Product', id: order.id };
+	}
+
+	@ResolveReference()
+	async resolveReference(reference: { __typename: string; id: string }) {
+		return this.orderService.findById(reference.id);
 	}
 }

@@ -1,4 +1,4 @@
-import { Field, ObjectType } from '@nestjs/graphql';
+import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
@@ -6,8 +6,10 @@ export type OrderDocument = HydratedDocument<Order>;
 
 @Schema()
 @ObjectType()
+@Directive('@key(fields: "id")')
+@Directive('@extends')
 export class Order {
-	@Field(() => String)
+	@Field(() => ID)
 	id: string;
 
 	@Prop()
