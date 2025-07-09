@@ -11,7 +11,8 @@ export enum ProductStatus {
 
 @Schema()
 @ObjectType()
-@Directive('@key(fields: "order_id")')
+@Directive('@key(fields: "id")')
+@Directive('@extends')
 export class Product {
 	@Field(() => ID)
 	id: string;

@@ -16,9 +16,8 @@ export class ProductResolver {
 	}
 
 	@ResolveReference()
-	async resolveReference(reference: { __typename: string; order_id: string }) {
-		await console.log('ASDASDASDASDSADASD');
-		return this.productService.findByOrderId(reference.order_id);
+	async resolveReference(reference: { __typename: string; id: string }) {
+		return this.productService.findByOrderId(reference.id);
 	}
 
 	@Query(() => [Product])

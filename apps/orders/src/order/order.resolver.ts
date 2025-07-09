@@ -19,6 +19,7 @@ export class OrderResolver {
 
 	@ResolveField(() => Product)
 	product(@Parent() order: Order) {
+		console.log(order.id);
 		return { __typename: 'Product', id: order.id };
 	}
 }
