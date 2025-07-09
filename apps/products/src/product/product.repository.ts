@@ -16,6 +16,12 @@ export class ProductRepository {
 		return this.productModel.findById(id).exec();
 	}
 
+	async findByOrderId(id: string): Promise<Product | null> {
+		const a = await this.productModel.findOne({ order_id: id }).exec();
+		console.log('AAAA', a);
+		return this.productModel.findOne({ order_id: id }).exec();
+	}
+
 	async updatePrice(id: string, price: number): Promise<Product | null> {
 		return this.productModel.findByIdAndUpdate({ _id: id }, { $set: { price } }, { new: true }).exec();
 	}

@@ -1,4 +1,4 @@
-import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver } from '@nestjs/graphql';
+import { Args, Context, Mutation, Parent, Query, ResolveField, Resolver, ResolveReference } from '@nestjs/graphql';
 import { ProductService } from './product.service';
 import { Product, BoolMap, ProductStatus } from '../schemas/product.schema';
 import { CategoryService } from 'src/category/category.service';
@@ -10,9 +10,15 @@ export class ProductResolver {
 		private categoryService: CategoryService,
 	) {}
 
-	@ResolveField(() => [String], { name: 'categoryNames' })
+	@ResolveField(() => [String])
 	async categories(@Parent() product: Product) {
 		return this.categoryService.findByIds(product.categories);
+	}
+
+	@ResolveReference()
+	async resolveReference(reference: { __typename: string; order_id: string }) {
+		await console.log('ASDASDASDASDSADASD');
+		return this.productService.findByOrderId(reference.order_id);
 	}
 
 	@Query(() => [Product])

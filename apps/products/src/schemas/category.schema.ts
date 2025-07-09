@@ -6,7 +6,6 @@ export type CategoryDocument = HydratedDocument<Category>;
 
 @Schema()
 @ObjectType()
-@Directive('@key(fields: "id")')
 export class Category {
 	@Field(() => String)
 	id: string;

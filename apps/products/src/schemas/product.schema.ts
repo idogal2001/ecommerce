@@ -1,4 +1,4 @@
-import { Directive, Field, ObjectType } from '@nestjs/graphql';
+import { Field, ObjectType, Directive, ID } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument, Types } from 'mongoose';
 
@@ -11,8 +11,9 @@ export enum ProductStatus {
 
 @Schema()
 @ObjectType()
+@Directive('@key(fields: "order_id")')
 export class Product {
-	@Field(() => String)
+	@Field(() => ID)
 	id: string;
 
 	@Prop()
@@ -46,10 +47,6 @@ export class Product {
 	@Prop()
 	@Field(() => [String])
 	categories: string[];
-
-	@Prop()
-	@Field(() => [String], { nullable: true })
-	categoryNames?: string[];
 
 	@Prop({ enum: ['ACTIVE', 'DISABLED'] })
 	@Field(() => ProductStatus)

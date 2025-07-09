@@ -15,6 +15,10 @@ export class ProductService {
 		return this.productRepository.findById(id);
 	}
 
+	async findByOrderId(id: string): Promise<Product | null> {
+		return this.productRepository.findByOrderId(id);
+	}
+
 	async isProductsExist(ids: string[]): Promise<BoolMap[]> {
 		const products = await this.productRepository.findAll();
 		const realProducts = ids.map(id => {
