@@ -17,9 +17,9 @@ export class Product {
 	@Field(() => ID)
 	id: string;
 
-	@Prop()
-	@Field()
-	order_id: string;
+	// @Prop()
+	// @Field()
+	// order_id: string;
 
 	@Prop()
 	@Field()
@@ -53,9 +53,9 @@ export class Product {
 	@Field(() => ProductStatus)
 	status: 'ACTIVE' | 'DISABLED';
 
-	@Prop()
-	@Field()
-	amount: number;
+	// @Prop()
+	// @Field()
+	// amount: number;
 }
 
 @ObjectType()

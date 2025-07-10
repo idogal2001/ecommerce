@@ -2,6 +2,7 @@ import { Module } from '@nestjs/common';
 import { GraphQLModule } from '@nestjs/graphql';
 import { ApolloFederationDriverConfig, ApolloFederationDriver } from '@nestjs/apollo';
 import { OrderModule } from './order/order.module';
+import { ProductOrderModule } from './product_order/product_order.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
 import { ConfigModule } from '@nestjs/config';
@@ -23,6 +24,7 @@ import { ConfigModule } from '@nestjs/config';
 			csrfPrevention: false,
 		}),
 		OrderModule,
+		ProductOrderModule,
 	],
 })
 export class AppModule {}
