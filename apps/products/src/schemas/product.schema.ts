@@ -17,10 +17,6 @@ export class Product {
 	@Field(() => ID)
 	id: string;
 
-	// @Prop()
-	// @Field()
-	// order_id: string;
-
 	@Prop()
 	@Field()
 	name: string;
@@ -52,10 +48,6 @@ export class Product {
 	@Prop({ enum: ['ACTIVE', 'DISABLED'] })
 	@Field(() => ProductStatus)
 	status: 'ACTIVE' | 'DISABLED';
-
-	// @Prop()
-	// @Field()
-	// amount: number;
 }
 
 @ObjectType()

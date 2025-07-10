@@ -26,13 +26,3 @@ export class OrderResolver {
 		return this.productOrderService.findByOrderId(order.id);
 	}
 }
-
-// @ResolveField(() => Product)
-// product(@Parent() order: Order) {
-// 	return { __typename: 'Product', id: order.id };
-// }
-
-// @ResolveReference()
-// async resolveReference(reference: { __typename: string; id: string }) {
-// 	return this.orderService.findById(reference.id);
-// }
