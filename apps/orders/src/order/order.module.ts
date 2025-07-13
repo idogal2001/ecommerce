@@ -9,7 +9,7 @@ import { HttpModule } from '@nestjs/axios';
 import { CommonUtilsModule } from '@app/common-utils';
 
 @Module({
-	imports: [MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]), ProductOrderModule, HttpModule],
+	imports: [MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]), ProductOrderModule, HttpModule, CommonUtilsModule],
 	providers: [OrderService, OrderRepository, OrderResolver],
 	exports: [OrderService],
 })

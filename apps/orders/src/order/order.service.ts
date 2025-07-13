@@ -5,6 +5,7 @@ import { OrderFromClient } from 'src/schemas/orderFromClient.schema';
 import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { ProductOrderService } from 'src/product_order/product_order.service';
+import { CommonUtilsService } from '@app/common-utils';
 
 @Injectable()
 export class OrderService {
@@ -26,7 +27,7 @@ export class OrderService {
 
 	async insertOrder(orderFromClient: OrderFromClient[]) {
 		const onlyIdsFromOrder = orderFromClient.map(order => order.id);
-		const products = await this.getProductById(onlyIdsFromOrder);
+		const products = await this.commonUtilsService.getProductById(onlyIdsFromOrder);
 		if (!products) {
 			throw new Error('No valid products found');
 		}

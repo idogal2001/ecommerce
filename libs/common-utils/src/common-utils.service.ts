@@ -2,7 +2,7 @@ import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { firstValueFrom } from 'rxjs';
 import { Injectable } from '@nestjs/common';
-import { onlyIdsFromOrderQuery } from 'apps/orders/src/queries/onlyIdsFromOrderQuery';
+import { onlyIdsFromOrderQuery } from '../queries/onlyIdsFromOrderQuery';
 
 @Injectable()
 export class CommonUtilsService {
