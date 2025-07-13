@@ -4,7 +4,7 @@ import { HydratedDocument, Types } from 'mongoose';
 
 export type ProductOrderDocument = HydratedDocument<ProductOrder>;
 
-@Schema()
+@Schema({ versionKey: false })
 @ObjectType()
 export class ProductOrder {
 	@Field(() => ID)

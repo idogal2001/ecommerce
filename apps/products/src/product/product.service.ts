@@ -11,6 +11,11 @@ export class ProductService {
 		return this.productRepository.findAll();
 	}
 
+	async getProductIds(): Promise<string[]> {
+		const productsIds = (await this.findAll()).map(product => product.id);
+		return productsIds;
+	}
+
 	async findById(id: string): Promise<Product | null> {
 		return this.productRepository.findById(id);
 	}
