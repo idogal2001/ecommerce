@@ -3,9 +3,7 @@ import { OrderRepository } from './order.repository';
 import { Order } from '../schemas/order.schema';
 import { OrderFromClient } from 'src/schemas/orderFromClient.schema';
 import { HttpService } from '@nestjs/axios';
-import { firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
-import { onlyIdsFromOrderQuery } from 'src/queries/onlyIdsFromOrderQuery';
 import { ProductOrderService } from 'src/product_order/product_order.service';
 
 @Injectable()
@@ -15,6 +13,7 @@ export class OrderService {
 		private readonly httpService: HttpService,
 		private readonly configService: ConfigService,
 		private readonly productOrderService: ProductOrderService,
+		private readonly commonUtilsService: CommonUtilsService,
 	) {}
 
 	async findAll(): Promise<Order[]> {
@@ -23,21 +22,6 @@ export class OrderService {
 
 	async findById(id: string): Promise<Order | null> {
 		return this.orderRepository.findById(id);
-	}
-
-	async getProductById(onlyIdsFromOrder: string[]): Promise<boolean> {
-		const { data } = await firstValueFrom(
-			this.httpService.post(this.configService.get<string>('PRODUCTS_URL') ?? '', {
-				query: onlyIdsFromOrderQuery,
-				variables: { ids: onlyIdsFromOrder },
-			}),
-		);
-
-		const existsArray = data.data.isProductsExist;
-
-		const allExist = existsArray.every(item => item.id !== 'false');
-
-		return allExist;
 	}
 
 	async insertOrder(orderFromClient: OrderFromClient[]) {

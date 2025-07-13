@@ -1,23 +1,23 @@
 {
-	"name": "ecommerce-server",
-	"version": "0.0.1",
-	"private": true,
-	"workspaces": [
-		"apps/*"
-	],
-	"scripts": {
-		"build": "turbo run build",
-		"start": "turbo run start",
-		"dev": "turbo run dev",
-		"dev:debug": "set NODE_ENV=development&& sh validate_env.sh&& turbo run dev:debug --no-cache --parallel --continue --no-daemon"
-	},
-	"devDependencies": {
-		"turbo": "^1.11.1"
-	},
-	"packageManager": "npm@8.19.2",
-	"dependencies": {
-		"@nestjs/axios": "^4.0.0",
-		"axios": "^1.10.0",
-		"dotenv": "^17.0.0"
-	}
+  "name": "ecommerce-server",
+  "version": "0.0.1",
+  "private": true,
+  "workspaces": [
+    "apps/*"
+  ],
+  "scripts": {
+    "build": "turbo run build",
+    "start": "turbo run start",
+    "dev": "turbo run dev",
+    "dev:debug": "set NODE_ENV=development&& sh validate_env.sh&& turbo run dev:debug --no-cache --parallel --continue --no-daemon"
+  },
+  "devDependencies": {
+    "turbo": "^1.11.1"
+  },
+  "packageManager": "npm@8.19.2",
+  "dependencies": {
+    "@nestjs/axios": "^4.0.0",
+    "axios": "^1.10.0",
+    "dotenv": "^17.0.0"
+  }
 }
