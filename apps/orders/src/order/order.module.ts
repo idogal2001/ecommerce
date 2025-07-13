@@ -5,9 +5,11 @@ import { OrderService } from './order.service';
 import { OrderRepository } from './order.repository';
 import { OrderResolver } from './order.resolver';
 import { ProductOrderModule } from 'src/product_order/product_order.module';
+import { HttpModule } from '@nestjs/axios';
+import { CommonUtilsModule } from '@app/common-utils';
 
 @Module({
-	imports: [MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]), ProductOrderModule],
+	imports: [MongooseModule.forFeature([{ name: Order.name, schema: OrderSchema }]), ProductOrderModule, HttpModule],
 	providers: [OrderService, OrderRepository, OrderResolver],
 	exports: [OrderService],
 })

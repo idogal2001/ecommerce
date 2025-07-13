@@ -1,11 +1,10 @@
-import { Directive, Field, ID, ObjectType } from '@nestjs/graphql';
+import { Field, ID, ObjectType } from '@nestjs/graphql';
 import { Prop, Schema, SchemaFactory } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
-import { ProductOrder } from './product_order.schema';
 
 export type OrderDocument = HydratedDocument<Order>;
 
-@Schema()
+@Schema({ versionKey: false })
 @ObjectType()
 export class Order {
 	@Field(() => ID)

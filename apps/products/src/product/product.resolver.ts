@@ -33,6 +33,12 @@ export class ProductResolver {
 	async isProductsExist(@Args('ids', { type: () => [String] }) ids: string[]) {
 		return this.productService.isProductsExist(ids);
 	}
+
+	@Query(() => [Product])
+	async getProductsIds() {
+		return this.productService.getProductIds();
+	}
+
 	@Mutation(() => Product)
 	async updatePrice(@Args('price', { type: () => Number }) price: number, @Args('id', { type: () => String }) id: string) {
 		return this.productService.updatePrice(price, id);
