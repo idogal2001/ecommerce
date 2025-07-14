@@ -10,7 +10,13 @@ export class ProductOrderRepository {
 
 	async findByOrderId(id: string): Promise<ProductOrder[] | unknown> {
 		const result = await this.productOrderModel.find({ order_id: id }).exec();
+		console.log('A');
 		return result;
+	}
+
+	async findByOrderIds(orderIds: string[]): Promise<ProductOrder[]> {
+		console.log('B');
+		return this.productOrderModel.find({ order_id: { $in: orderIds } }).exec();
 	}
 
 	async insertProductOrder(order_id: string, orderFromClient: OrderFromClient[]) {

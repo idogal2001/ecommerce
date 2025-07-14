@@ -11,6 +11,10 @@ export class ProductOrderService {
 		return this.productOrderRepository.findByOrderId(id);
 	}
 
+	async findByOrderIds(orderIds: string[]): Promise<ProductOrder[]> {
+		return this.productOrderRepository.findByOrderIds(orderIds);
+	}
+
 	async insertProductOrder(order_id: string, orderFromClient: OrderFromClient[]) {
 		return this.productOrderRepository.insertProductOrder(order_id, orderFromClient);
 	}

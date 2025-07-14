@@ -6,13 +6,12 @@ import { HttpService } from '@nestjs/axios';
 import { ConfigService } from '@nestjs/config';
 import { ProductOrderService } from 'src/product_order/product_order.service';
 import { CommonUtilsService } from '@app/common-utils';
+import { OrderFromClientOutput } from 'src/schemas/orderFromClientOutput.schema';
 
 @Injectable()
 export class OrderService {
 	constructor(
 		private readonly orderRepository: OrderRepository,
-		private readonly httpService: HttpService,
-		private readonly configService: ConfigService,
 		private readonly productOrderService: ProductOrderService,
 		private readonly commonUtilsService: CommonUtilsService,
 	) {}
@@ -25,7 +24,11 @@ export class OrderService {
 		return this.orderRepository.findById(id);
 	}
 
-	async insertOrder(orderFromClient: OrderFromClient[]) {
+	async findByIds(ids: string[]): Promise<Order[] | null> {
+		return this.orderRepository.findByIds(ids);
+	}
+
+	async insertOrder(orderFromClient: OrderFromClient[]): Promise<OrderFromClientOutput> {
 		const onlyIdsFromOrder = orderFromClient.map(order => order.id);
 		const products = await this.commonUtilsService.getProductById(onlyIdsFromOrder);
 		if (!products) {
@@ -33,5 +36,6 @@ export class OrderService {
 		}
 		const inserted = await this.orderRepository.insertOrder({ date: new Date() });
 		this.productOrderService.insertProductOrder(inserted.id, orderFromClient);
+		return inserted;
 	}
 }

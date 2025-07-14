@@ -1,5 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
-import { Prop, Schema } from '@nestjs/mongoose';
+import { Schema } from '@nestjs/mongoose';
 import { HydratedDocument } from 'mongoose';
 
 export type OrderFromClientOutputDocument = HydratedDocument<OrderFromClientOutput>;
@@ -7,10 +7,9 @@ export type OrderFromClientOutputDocument = HydratedDocument<OrderFromClientOutp
 @Schema()
 @ObjectType()
 export class OrderFromClientOutput {
-	@Field()
+	@Field(() => ID)
 	id: string;
 
-	@Prop()
 	@Field()
-	amount: number;
+	date: Date;
 }

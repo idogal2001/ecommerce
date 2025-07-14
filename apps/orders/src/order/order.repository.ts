@@ -16,6 +16,10 @@ export class OrderRepository {
 		return this.orderModel.findById(id).exec();
 	}
 
+	async findByIds(ids: string[]): Promise<Order[] | null> {
+		return this.orderModel.find({ _id: { $in: ids } }).exec();
+	}
+
 	async findByProduct(id: string, price: number): Promise<Order | null> {
 		return this.orderModel.findByIdAndUpdate({ _id: id }, { $set: { price } }, { new: true }).exec();
 	}
