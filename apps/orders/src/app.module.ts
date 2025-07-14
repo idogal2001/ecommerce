@@ -6,6 +6,7 @@ import { ProductOrderModule } from './product_order/product_order.module';
 import { MongooseModule } from '@nestjs/mongoose';
 import { ConfigService } from '@nestjs/config';
 import { ConfigModule } from '@nestjs/config';
+import { DataLoaderModule } from './dataloader/dataloader.module';
 
 @Module({
 	imports: [
@@ -25,6 +26,7 @@ import { ConfigModule } from '@nestjs/config';
 		}),
 		OrderModule,
 		ProductOrderModule,
+		DataLoaderModule,
 	],
 })
 export class AppModule {}
