@@ -18,6 +18,7 @@ export class ProductOrderRepository {
 		console.log('B');
 		return this.productOrderModel.find({ order_id: { $in: orderIds } }).exec();
 	}
+
 	async insertProductOrder(order_id: string, orderFromClient: OrderFromClient[]) {
 		const documents = orderFromClient.map(item => ({
 			product_id: item.id,

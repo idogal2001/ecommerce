@@ -22,8 +22,8 @@ export class OrderResolver {
 
 	@ResolveField(() => [ProductOrder])
 	async productsOrder(@Parent() order: Order) {
-		return this.productOrderService.findByOrderId(order.id);
-		// return this.dataloaderService.productOrdersByOrderId.load(order.id);
+		// return this.productOrderService.findByOrderId(order.id);
+		return this.dataloaderService.productOrdersByOrderId.load(order.id);
 	}
 
 	@Query(() => [Order])
