@@ -12,8 +12,6 @@ import { OrderFromClientOutput } from 'src/schemas/orderFromClientOutput.schema'
 export class OrderService {
 	constructor(
 		private readonly orderRepository: OrderRepository,
-		private readonly httpService: HttpService,
-		private readonly configService: ConfigService,
 		private readonly productOrderService: ProductOrderService,
 		private readonly commonUtilsService: CommonUtilsService,
 	) {}
@@ -24,6 +22,10 @@ export class OrderService {
 
 	async findById(id: string): Promise<Order | null> {
 		return this.orderRepository.findById(id);
+	}
+
+	async findByIds(ids: string[]): Promise<Order[] | null> {
+		return this.orderRepository.findByIds(ids);
 	}
 
 	async insertOrder(orderFromClient: OrderFromClient[]): Promise<OrderFromClientOutput> {

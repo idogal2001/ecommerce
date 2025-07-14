@@ -18,18 +18,25 @@ export class OrderResolver {
 		return this.orderService.findAll();
 	}
 
+	@ResolveField(() => [ProductOrder])
+	async productsOrder(@Parent() order: Order) {
+		console.log('hello');
+		return this.productOrderService.findByOrderId(order.id);
+	}
+
 	@Query(() => Order)
 	async getOrderById(@Args('id', { type: () => String }) id: string) {
 		return this.orderService.findById(id);
 	}
 
+	@Query(() => [Order])
+	async getOrdersByIds(@Args('ids', { type: () => [String] }) ids: string[]) {
+		await console.log('AAAAA', await this.orderService.findByIds(ids));
+		return this.orderService.findByIds(ids);
+	}
+
 	@Mutation(() => OrderFromClientOutput)
 	async insertOrder(@Args('orderFromClient', { type: () => [OrderFromClient] }) OrderFromClient: OrderFromClient[]) {
 		return this.orderService.insertOrder(OrderFromClient);
-	}
-
-	@ResolveField(() => [ProductOrder])
-	async productsOrder(@Parent() order: Order) {
-		return this.productOrderService.findByOrderId(order.id);
 	}
 }
