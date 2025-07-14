@@ -13,6 +13,7 @@ export class OrderRepository {
 	}
 
 	async findById(id: string): Promise<Order | null> {
+		console.log('DB call: findById', id);
 		return this.orderModel.findById(id).exec();
 	}
 

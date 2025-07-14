@@ -1,4 +1,4 @@
-import { Args, Query, Resolver, ResolveField, Parent, ResolveReference, Mutation } from '@nestjs/graphql';
+import { Args, Query, Resolver, ResolveField, Parent, Mutation } from '@nestjs/graphql';
 import { OrderService } from './order.service';
 import { Order } from '../schemas/order.schema';
 import { ProductOrder } from 'src/schemas/product_order.schema';
@@ -23,7 +23,7 @@ export class OrderResolver {
 		return this.orderService.findById(id);
 	}
 
-	@Mutation(() => [OrderFromClientOutput])
+	@Mutation(() => OrderFromClientOutput)
 	async insertOrder(@Args('orderFromClient', { type: () => [OrderFromClient] }) OrderFromClient: OrderFromClient[]) {
 		return this.orderService.insertOrder(OrderFromClient);
 	}
